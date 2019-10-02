@@ -1,0 +1,60 @@
+<!-- https://vuejs.org/v2/guide/syntax.html#Interpolations -->
+<!-- https://vuejs.org/v2/guide/syntax.html#v-bind-Shorthand -->
+
+<div id="app">
+  
+  <!--
+    https://vuejs.org/v2/guide/list.html#Mapping-an-Array-to-Elements-with-v-for
+  -->
+  <nav class="nav">
+    <h2 class="nav__header">Products</h2>
+    <div class="nav__cart">
+      <button @click="showCart = !showCart">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+      <span class="total-quantity">{{ totalQuantity }}</span>
+      <div v-if="showCart" class="cart-dropdown">
+        <ul class="cart-dropdown__list">
+          <li
+            v-for="product in cart"
+            :key="product.id"
+          >
+            {{ product.name }} ({{ product.quantity }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--
+    https://vuejs.org/v2/guide/list.html#Mapping-an-Array-to-Elements-with-v-for
+  -->
+  <!-- https://vuejs.org/v2/guide/syntax.html#v-on-Shorthand -->
+  <section class="products">
+    <div v-for="product in products" :key="product.id" class="product">
+      <h3 class="product__header">{{ product.name }}</h3>
+      <img
+        src="https://via.placeholder.com/150"
+        :alt="product.name"
+        class="product__image"
+      >
+      <p class="product__description">{{ product.description }}</p>
+      <div class="cart">
+        <button
+          @click="updateCart(product, 'subtract')"
+          class="cart__button"
+        >
+          -
+        </button>
+        <span class="cart__quantity">{{ product.quantity }}</span>
+        <button
+          @click="updateCart(product, 'add')"
+          class="cart__button"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </section>  
+  
+</div>
